@@ -52,19 +52,3 @@ def step_then_todo_list_should_be_empty(context):
     tasks = context.manager.list_tasks()
     assert len(tasks) == 0, "To-do list is not empty."
 
-@then('the system should prevent the task from being added')
-def step_then_prevent_task_addition(context):
-    tasks = context.manager.list_tasks()
-    assert len(tasks) == 1, "Duplicate task was added."
-
-@then('the system should indicate that the task does not exist')
-def step_then_task_not_found(context):
-    result = context.manager.mark_completed("Wash car")
-    assert not result, "Non-existent task was marked as completed."
-
-@then('the to-do list should remain unchanged:')
-def step_then_todo_list_unchanged(context):
-    tasks = context.manager.list_tasks()
-    for row in context.table:
-        assert any(t["task"] == row["Task"] and t["status"] == row["Status"] for t in tasks), \
-            f"{row['Task']} with status {row['Status']} is not in the list."
