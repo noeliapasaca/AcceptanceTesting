@@ -17,4 +17,16 @@ class ToDoListManager:
 
     def clear_tasks(self):
         self.tasks.clear()
-    
+
+    def edit_task(self, old_task, new_task):
+        for task in self.tasks:
+            if task["task"] == old_task:
+                task["task"] = new_task
+                return True
+        return False  # Task not found
+
+    def filter_tasks(self, status):
+        # Correctly filter tasks by status
+        return [task for task in self.tasks if task["status"] == status]
+
+
